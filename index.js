@@ -9,7 +9,7 @@ const path = require('path')
 require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://creativeAgency:creativeagencyservices69@cluster0.ynfam.mongodb.net/creativeAgencyData?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ynfam.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 app.use(cors())
 app.use(bodyParser.json())
