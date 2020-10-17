@@ -5,18 +5,17 @@ const ObjectId=require('mongodb').ObjectId;
 const fileUpload=require('express-fileupload')
 const bodyParser = require('body-parser')
 const fs=require('fs-extra')
-require('dotenv').config()
-
+const path = require('path')
+require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ynfam.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://creativeAgency:creativeagencyservices69@cluster0.ynfam.mongodb.net/creativeAgencyData?retryWrites=true&w=majority`;
 
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static('orders'));
 app.use(fileUpload());
 const port=5000
-
 const client = new MongoClient(uri, { useNewUrlParser: true,useUnifiedTopology: true });
 client.connect(err => {
     const  orderCollection = client.db("creativeAgencyData").collection("order");
@@ -126,4 +125,4 @@ client.connect(err => {
 app.get('/', (req, res) => {
   res.send('database is working')
 })
-app.listen(port)
+app.listen(process.env.PORT||port)
